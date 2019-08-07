@@ -1,0 +1,37 @@
+{
+    "name": "destiny/power",
+    "authors": [
+        {
+            "name": "Destiny Shen",
+            "email": "956167863@qq.com"
+        }
+    ],
+    "description" : "yii2 Sea star Power",
+    "keywords" : [
+        "yii2",
+        "framework",
+        "asphp"
+    ],
+    "homepage" : "http://www.seastart.cn/",
+    "type" : "project",
+    "license" : "BSD-3-Clause",
+    "support" : {
+        "issues" : "https://github.com/yiisoft/yii2/issues?state=open",
+        "forum" : "http://www.yiiframework.com/forum/",
+        "wiki" : "http://www.yiiframework.com/wiki/",
+        "irc" : "irc://irc.freenode.net/yii",
+        "source" : "https://github.com/yiisoft/yii2"
+    },
+    "minimum-stability" : "stable",
+    "require": {
+        "php" : ">=7.0.0",
+        "yiisoft/yii2" : ">=2.0.6",
+        "google/protobuf": "^3.9",
+        "grpc/grpc": "^v1.3.0",
+        "sensiolabs/consul-php-sdk": "^3.0"
+    },
+
+    "config" : {
+        "process-timeout" : 1800
+    }
+}
