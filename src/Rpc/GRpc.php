@@ -18,6 +18,8 @@ class GRpc
 {
     private $host;
     private $port;
+    private $consulHost =  '127.0.0.1';
+    private $consulPort =  8500;
 
     /**
      * GRpc constructor.
@@ -25,7 +27,9 @@ class GRpc
      */
     public function __construct($serverName)
     {
-        $serviceFactory = new SensioLabs\Consul\ServiceFactory();
+        $serviceFactory = new SensioLabs\Consul\ServiceFactory([
+            'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"
+        ]);
         $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式
         $service = $cl->service($serverName); //参数传入和服务端约定的服务名
         $microServiceData = \GuzzleHttp\json_decode($service->getBody(), true);  //请求微服务的具体地址
