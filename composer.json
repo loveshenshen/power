@@ -35,7 +35,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Grpc\\": "src/"
+            "Seastart\\Power\\": "src/"
         }
     }
 }
