@@ -42,7 +42,7 @@ class GRpc
         if(!empty($consul->port)){
             $this->port = $consul->port;
         }
-        if(!empty($consul->serverName)){
+        if(empty($consul->serverName)){
             throw new InvalidArgumentException("Consul serverName must be config.");
         }
         $this->serverName = $consul->serverName;
@@ -52,7 +52,7 @@ class GRpc
         ]);
         $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式
         $service = $cl->service($this->serverName); //参数传入和服务端约定的服务名
-        $microServiceData = \GuzzleHttp\json_decode($service->getBody(), true);  //请求微服务的具体地址
+        $microServiceData = \GuzzleHttp\json_decode($service->getBody(), true)[0];  //请求微服务的具体地址
         if(empty($microServiceData)){
             throw new InvalidArgumentException("Not found server of consul ");
         }

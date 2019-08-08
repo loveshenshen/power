@@ -25,7 +25,6 @@ class YunPianUtil
       private static  $secret = '';
       private static  $version = '';
       private static  $type = 1;//type =1 默认是云片
-      private static  $serverName = "go.micro.srv.greeter";
 
 
     /**
@@ -46,7 +45,7 @@ class YunPianUtil
               }
           }
 
-           $rpc = new GRpc(self::$serverName);
+           $rpc = new GRpc();
            $request = new \Region\messageRequest();
            $request->setVersion(self::$version);
            $request->setType(self::$type);
