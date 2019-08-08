@@ -6,7 +6,7 @@
 // http://www.seastart.cn
 //
 // ///////////////////////////////////////////////////////////////////////////
-
+namespace src\Util;
 /**
  * Created by PhpStorm.
  * User: sarukinhyou
@@ -14,6 +14,10 @@
  * Time: 11:05
  * Author: shen
  */
+use src\Rpc\GRpc;
+use HttpException;
+use Throwable;
+
 class RegionUtil
 {
     private static  $appId = '1111';
@@ -45,7 +49,7 @@ class RegionUtil
         if(!isset($result[0]) ){
             throw new HttpException("Result is Invalid");
         }
-        if($result[0] instanceof  Region\Response){
+        if($result[0] instanceof  \Region\Response){
             return [
                 'api_code'=>$result[0]->getApiCode(),
                 'data'=>json_decode($result[0]->getData(),true),

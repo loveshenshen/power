@@ -6,7 +6,11 @@
 // http://www.seastart.cn
 //
 // ///////////////////////////////////////////////////////////////////////////
+namespace src\Rpc;
 
+
+use InvalidArgumentException;
+use Throwable;
 /**
  * Created by PhpStorm.
  * User: sarukinhyou
@@ -27,7 +31,7 @@ class GRpc
      */
     public function __construct($serverName)
     {
-        $serviceFactory = new SensioLabs\Consul\ServiceFactory([
+        $serviceFactory = new \SensioLabs\Consul\ServiceFactory([
             'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"
         ]);
         $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式

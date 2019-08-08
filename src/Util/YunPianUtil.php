@@ -6,7 +6,7 @@
 // http://www.seastart.cn
 //
 // ///////////////////////////////////////////////////////////////////////////
-
+namespace src\Util;
 /**
  * Created by PhpStorm.
  * User: sarukinhyou
@@ -14,6 +14,11 @@
  * Time: 11:04
  * Author: shen
  */
+use src\Rpc\GRpc;
+use HttpException;
+use Throwable;
+
+
 class YunPianUtil
 {
       private static  $appId = '';
