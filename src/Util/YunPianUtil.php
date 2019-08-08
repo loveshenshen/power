@@ -36,6 +36,16 @@ class YunPianUtil
      * @throws Throwable
      */
       public static function sendMessage($mobile,$text){
+
+          if(isset(\Yii::$app->params['application'])){
+              if(isset(\Yii::$app->params['application']['appId'])){
+                  self::$appId = \Yii::$app->params['application']['appId'];
+              }
+              if(isset(\Yii::$app->params['application']['appSecret'])){
+                  self::$secret = \Yii::$app->params['application']['appSecret'];
+              }
+          }
+
            $rpc = new GRpc(self::$serverName);
            $request = new \Region\messageRequest();
            $request->setVersion(self::$version);

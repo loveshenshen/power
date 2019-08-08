@@ -38,8 +38,17 @@ class RegionUtil
     public static function getRegionList($type,$parentId = 0,$page = 0,$num = 20){
         $rpc = new GRpc(self::$serverName);
         $request = new \Region\Request();
+
+        if(isset(\Yii::$app->params['application'])){
+            if(isset(\Yii::$app->params['application']['appId'])){
+                self::$appId = \Yii::$app->params['application']['appId'];
+            }
+            if(isset(\Yii::$app->params['application']['appSecret'])){
+                self::$secret = \Yii::$app->params['application']['appSecret'];
+            }
+        }
         $request->setAppId(self::$appId);
-        $request->setAppId(self::$secret);
+        $request->setAppSecret(self::$secret);
         $request->setVersion(self::$version);
         $request->setType($type);
         $request->setParentId($parentId);
