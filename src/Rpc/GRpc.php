@@ -38,9 +38,11 @@ class GRpc
         }
         if(!empty($consul->host)){
             $this->host = $consul->host;
+            $this->consulHost = $consul->host;
         }
         if(!empty($consul->port)){
             $this->port = $consul->port;
+            $this->consulPort = $consul->port;
         }
         if(empty($consul->serverName)){
             throw new InvalidArgumentException("Consul serverName must be config.");

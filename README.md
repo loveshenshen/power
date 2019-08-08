@@ -5,10 +5,10 @@ main-local.php
 
 ```
    "consul"=>[
-           'class'=>\src\Core\Consul::className(),
+           'class'=>\src\Core\Consul::class,
            'host'=>'127.0.0.1', //consul 所在服务器的地址
            'port'=>'8500',
-           'serverName'=>'go.micro.srv.greet'
+           'serverName'=>'go.micro.srv.greeter' ,//替换为实际的微服务名称
            
    ],
    
