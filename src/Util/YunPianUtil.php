@@ -54,7 +54,7 @@ class YunPianUtil
            $request->setAppSecret(self::$secret);
            $request->setMobile($mobile);
            $request->setText($text);
-           $result = $rpc->call($request);
+           $result = $rpc->call($request,"Send");
            if(!isset($result[0]) ){
                throw new HttpException("Result is Invalid");
            }

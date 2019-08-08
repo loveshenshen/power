@@ -54,7 +54,7 @@ class RegionUtil
         $request->setParentId($parentId);
         $request->setPage($page);
         $request->setNum($num);
-        $result = $rpc->call($request);
+        $result = $rpc->call($request,"Region");
         if(!isset($result[0]) ){
             throw new HttpException("Result is Invalid");
         }

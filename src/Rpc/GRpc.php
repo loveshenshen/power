@@ -24,18 +24,34 @@ class GRpc
     private $port;
     private $consulHost =  '127.0.0.1';
     private $consulPort =  8500;
+    private $serverName =  "go.micro.srv.greeter";
 
     /**
      * GRpc constructor.
      * @param $serverName
      */
-    public function __construct($serverName)
+    public function __construct()
     {
+        $consul = \Yii::$app->consul;
+        if(!$consul){
+            throw new InvalidArgumentException(" Consul is not  config.");
+        }
+        if(!empty($consul->host)){
+            $this->host = $consul->host;
+        }
+        if(!empty($consul->port)){
+            $this->port = $consul->port;
+        }
+        if(!empty($consul->serverName)){
+            throw new InvalidArgumentException("Consul serverName must be config.");
+        }
+        $this->serverName = $consul->serverName;
+
         $serviceFactory = new \SensioLabs\Consul\ServiceFactory([
             'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"
         ]);
         $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式
-        $service = $cl->service($serverName); //参数传入和服务端约定的服务名
+        $service = $cl->service($this->serverName); //参数传入和服务端约定的服务名
         $microServiceData = \GuzzleHttp\json_decode($service->getBody(), true);  //请求微服务的具体地址
         if(empty($microServiceData)){
             throw new InvalidArgumentException("Not found server of consul ");
@@ -46,15 +62,16 @@ class GRpc
 
     /**
      * @param $request
+     * @param String $method
      * @return array
      * @throws Throwable
      */
-    public function call($request){
+    public function call($request,$method){
         try{
             $client = new  \Region\RegionClient($this->host.":".$this->port,[
                 'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             ]);
-            $result = $client->Send($request)->wait();
+            $result = $client->$method($request)->wait();
         }catch(\Exception $e){
            throw $e;
         }catch(\Throwable $e){
