@@ -32,5 +32,10 @@
 
     "config" : {
         "process-timeout" : 1800
+    },
+    "autoload": {
+        "psr-4": {
+            "Grpc\\": "src/"
+        }
     }
 }
