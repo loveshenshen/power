@@ -35,7 +35,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Seastart\\Power\\": "src/"
+            "Src\\Core\\": "src/Core",
+            "Src\\Rpc\\": "src/Rpc",
+            "Src\\Util\\": "src/Util",
+            "GPBMetadata\\": "src/",
+            "Region\\": "src/"
         }
     }
 }
