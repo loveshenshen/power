@@ -29,6 +29,7 @@ class PayUtil
     private static  $appId = '1111';
     private static  $secret = '2222';
     private static  $version = '1.0';
+    private static  $serverName = "go.micro.srv.gopay";
 
 
     /**
@@ -44,7 +45,15 @@ class PayUtil
      * @throws Throwable
      */
     public static function Pay($sn,$amount,$platform,$payType = 1,$remark,$callback,$openid=""){
-        $rpc = new GRpc();
+
+        if(empty(self::$serverName)){
+            $consul = \Yii::$app->consul;
+            if(!isset($consul['serverName']['pay'])){
+                throw new \InvalidArgumentException("Please to config consul serverName of pay");
+            }
+            self::$serverName = $consul['serverName']['pay'];
+        }
+        $rpc = new GRpc(self::$serverName);
         $request = new Request();
 
         if(isset(\Yii::$app->params['application'])){

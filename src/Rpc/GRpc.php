@@ -30,7 +30,7 @@ class GRpc
      * GRpc constructor.
      * @param $serverName
      */
-    public function __construct()
+    public function __construct($serverName = '' )
     {
         $consul = \Yii::$app->consul;
         if(!$consul){
@@ -44,10 +44,9 @@ class GRpc
             $this->port = $consul->port;
             $this->consulPort = $consul->port;
         }
-        if(empty($consul->serverName)){
-            throw new InvalidArgumentException("Consul serverName must be config.");
+        if(!empty($serverName)){
+            $this->serverName = $serverName;
         }
-        $this->serverName = $consul->serverName;
 
         $serviceFactory = new \SensioLabs\Consul\ServiceFactory([
             'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"

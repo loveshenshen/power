@@ -18,5 +18,5 @@ class Consul
 {
      public $host = '127.0.0.1';
      public $port =  8500;
-     public $serverName = "consul";
+     public $serverName = [];
 }

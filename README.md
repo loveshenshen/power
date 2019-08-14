@@ -8,8 +8,13 @@ main-local.php
            'class'=>\src\Core\Consul::class,
            'host'=>'127.0.0.1', //consul 所在服务器的地址
            'port'=>'8500',
-           'serverName'=>'go.micro.srv.greeter' ,//替换为实际的微服务名称
-           
+           //微服务名称配置
+           'serverName'=>[
+                'yunpian' =>'go.micro.srv.region',
+                'region' =>'go.micro.srv.region',
+                'pay' =>'go.micro.srv.gopay',
+           ] ,
+            
    ],
    
 ```

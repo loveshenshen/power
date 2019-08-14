@@ -23,6 +23,7 @@ class RegionUtil
     private static  $appId = '1111';
     private static  $secret = '2222';
     private static  $version = '1.0';
+    private static  $serverName = "go.micro.srv.region";
 
 
     /**
@@ -35,7 +36,14 @@ class RegionUtil
      * @throws Throwable
      */
     public static function getRegionList($type,$parentId = 0,$page = 0,$num = 20){
-        $rpc = new GRpc();
+        if(empty(self::$serverName)){
+            $consul = \Yii::$app->consul;
+            if(!isset($consul['serverName']['region'])){
+                throw new \InvalidArgumentException("Please to config consul serverName of region");
+            }
+            self::$serverName = $consul['serverName']['pay'];
+        }
+        $rpc = new GRpc(self::$serverName);
         $request = new \Region\Request();
 
         if(isset(\Yii::$app->params['application'])){

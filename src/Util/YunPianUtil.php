@@ -25,6 +25,7 @@ class YunPianUtil
       private static  $secret = '';
       private static  $version = '';
       private static  $type = 1;//type =1 默认是云片
+      private static  $serverName = "go.micro.srv.region";
 
 
     /**
@@ -44,8 +45,14 @@ class YunPianUtil
                   self::$secret = \Yii::$app->params['application']['appSecret'];
               }
           }
-
-           $rpc = new GRpc();
+          if(empty(self::$serverName)){
+              $consul = \Yii::$app->consul;
+              if(!isset($consul['serverName']['yunpian'])){
+                  throw new \InvalidArgumentException("Please to config consul serverName of yunpian");
+              }
+              self::$serverName = $consul['serverName']['pay'];
+          }
+           $rpc = new GRpc(self::$serverName);
            $request = new \Region\messageRequest();
            $request->setVersion(self::$version);
            $request->setType(self::$type);
