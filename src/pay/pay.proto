@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package gopay;
+
+service Gopay {
+    rpc Pay(Request) returns (Response) {}
+    rpc Refund(RefundRequest) returns (Response) {}
+}
+
+
+message Request {
+    string version =1; //1.0
+    string appId =2;
+    string appSecret =3;
+    string sn =4;
+    int32 payType =5;//1-微信 2-支付宝
+    int32 platform =6; // 1-app 2-小程序 3-公众号 4-pc
+    float amount = 7; //金额
+    string remark = 8; // body 或者subject
+    string callback = 9; //回调地址
+    string openid = 10; //openid
+}
+
+message Response {
+    string api_code =1;
+    string data =2;
+    string api_msg =3;
+}
+
+
+message RefundRequest{
+    string version =1; //1.0
+    string appId =2 ;
+    string appSecret =3 ;
+    string sn =4;
+    string tradeNo =5;
+    float totalAmount =6; //退款总金额
+    float amount =7; //退款金额
+    string remark =8; //退款原因
+    int32 refundType =9;//1-微信 2-支付宝
+    int32 platform =10; // 1-app 2-小程序 3-公众号 4-pc
+}

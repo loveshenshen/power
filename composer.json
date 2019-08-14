@@ -39,7 +39,8 @@
             "Src\\Rpc\\": "src/Rpc",
             "Src\\Util\\": "src/Util",
             "GPBMetadata\\": "src/",
-            "Region\\": "src/"
+            "Region\\": "src/region/",
+            "GoPay\\":"src/pay/"
         }
     }
 }
