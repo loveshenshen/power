@@ -47,4 +47,11 @@ useage
    
    \src\Util\RegionUtil::getRegionList(0)
 
+   //支付
+   
+   \src\Util\PayUtil::Pay($sn,$amount,$platform,$payType = 1,$remark,$callback,$openid="")
+   
+   //退款
+   
+\src\Util\PayUtil::Refund($sn,$amount,$refundType = 1,$platform,$tradeNo,$totalAmount,$remark)
 ```
