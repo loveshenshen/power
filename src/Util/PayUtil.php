@@ -34,7 +34,7 @@ class PayUtil
     /**
      * @param string $sn  订单编号
      * @param float $amount 金额
-     * @param  int $platform 支付终端 // 1-app 2-小程序 3-公众号 4-pc
+     * @param  int $platform 支付终端  微信 1-app 2-h5 3-pc 4-小程序 5-公众号   支付宝 1-app 2-手机网站 3-电脑网站
      * @param int $payType 支付类型 1-微信 2-支付宝
      * @param string $remark 备注 回调的body字段
      * @param string $callback 回调地址
@@ -86,7 +86,7 @@ class PayUtil
      * @param string $sn 退款订单号
      * @param float $amount 退款金额
      * @param int $refundType 1-微信 2-支付宝
-     * @param int $platform  退款类型 微信： 1-app 2-小程序 3-公众号 4-pc 支付宝 1-app 2-
+     * @param int $platform  退款类型
      * @param string $tradeNo 支付单号(支付成功由第三方返回支付宝trade_no,微信transaction_id)
      * @param float $totalAmount  订单总金额
      * @param string $remark  退款原因

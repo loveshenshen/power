@@ -14,7 +14,7 @@ message Request {
     string appSecret =3;
     string sn =4;
     int32 payType =5;//1-微信 2-支付宝
-    int32 platform =6; // 1-app 2-小程序 3-公众号 4-pc
+    int32 platform =6; // // 微微信 1-app 2-h5 3-pc 4-小程序 5-公众号   支付宝 1-app 2-手机网站 3-电脑网站
     float amount = 7; //金额
     string remark = 8; // body 或者subject
     string callback = 9; //回调地址
@@ -38,5 +38,5 @@ message RefundRequest{
     float amount =7; //退款金额
     string remark =8; //退款原因
     int32 refundType =9;//1-微信 2-支付宝
-    int32 platform =10; // 1-app 2-小程序 3-公众号 4-pc
+    int32 platform =10; // 微信 1-app 2-h5 3-pc 4-小程序 5-公众号   支付宝 1-app 2-手机网站 3-电脑网站
 }
