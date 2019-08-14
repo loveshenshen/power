@@ -81,11 +81,20 @@ class PayUtil
             throw new HttpException("Result is Invalid");
         }
         if($result[0] instanceof  Response){
-            return [
-                'api_code'=>$result[0]->getApiCode(),
-                'data'=>$result[0]->getData(),
-                'api_msg'=>$result[0]->getApiMsg()
-            ];
+            if($result[0]->getApiCode() == 200 && $payType == 1){
+                return [
+                    'api_code'=>$result[0]->getApiCode(),
+                    'data'=>json_encode($result[0]->getData(),true),
+                    'api_msg'=>$result[0]->getApiMsg()
+                ];
+            }else{
+                return [
+                    'api_code'=>$result[0]->getApiCode(),
+                    'data'=>$result[0]->getData(),
+                    'api_msg'=>$result[0]->getApiMsg()
+                ];
+            }
+
         }else{
             throw new HttpException("Result is Invalid");
         }
