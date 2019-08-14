@@ -35,9 +35,9 @@
     },
     "autoload": {
         "psr-4": {
-            "Src\\Core\\": "src/Core",
-            "Src\\Rpc\\": "src/Rpc",
-            "Src\\Util\\": "src/Util",
+            "Src\\Core\\": "src/Core/",
+            "Src\\Rpc\\": "src/Rpc/",
+            "Src\\Util\\": "src/Util/",
             "GPBMetadata\\": "src/",
             "Region\\": "src/region/",
             "GoPay\\":"src/pay/"
