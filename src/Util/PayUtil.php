@@ -17,6 +17,7 @@
 
 namespace src\Util;
 
+use Gopay\GopayClient;
 use Gopay\RefundRequest;
 use Gopay\Request;
 use Gopay\Response;
@@ -75,7 +76,7 @@ class PayUtil
         $request->setOpenid($openid);
         $request->setCallback($callback);
 
-        $result = $rpc->call($request,"Pay");
+        $result = $rpc->call($request,"Pay",GopayClient::class);
         if(!isset($result[0]) ){
             throw new HttpException("Result is Invalid");
         }

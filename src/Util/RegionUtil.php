@@ -14,6 +14,7 @@ namespace src\Util;
  * Time: 11:05
  * Author: shen
  */
+use Region\RegionClient;
 use src\Rpc\GRpc;
 use HttpException;
 use Throwable;
@@ -61,7 +62,7 @@ class RegionUtil
         $request->setParentId($parentId);
         $request->setPage($page);
         $request->setNum($num);
-        $result = $rpc->call($request,"Region");
+        $result = $rpc->call($request,"Region",RegionClient::class);
         if(!isset($result[0]) ){
             throw new HttpException("Result is Invalid");
         }

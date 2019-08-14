@@ -14,6 +14,7 @@ namespace src\Util;
  * Time: 11:04
  * Author: shen
  */
+use Region\RegionClient;
 use src\Rpc\GRpc;
 use HttpException;
 use Throwable;
@@ -60,7 +61,7 @@ class YunPianUtil
            $request->setAppSecret(self::$secret);
            $request->setMobile($mobile);
            $request->setText($text);
-           $result = $rpc->call($request,"Send");
+           $result = $rpc->call($request,"Send",RegionClient::class);
            if(!isset($result[0]) ){
                throw new HttpException("Result is Invalid");
            }

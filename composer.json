@@ -39,7 +39,7 @@
             "src\\Rpc\\": "src/Rpc/",
             "src\\Util\\": "src/Util/",
             "Region\\": "src/region/Region/",
-            "GoPay\\":"src/pay/Gopay/"
+            "Gopay\\":"src/pay/Gopay/"
         },
         "files":[
             "src/pay/GPBMetadata/Pay.php",

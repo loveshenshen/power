@@ -67,9 +67,10 @@ class GRpc
      * @return array
      * @throws Throwable
      */
-    public function call($request,$method){
+    public function call($request,$method,$clientName){
         try{
-            $client = new  \Region\RegionClient($this->host.":".$this->port,[
+            $clientName = '\\'.$clientName;
+            $client = new  $clientName($this->host.":".$this->port,[
                 'credentials' => \Grpc\ChannelCredentials::createInsecure(),
             ]);
             $result = $client->$method($request)->wait();
