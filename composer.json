@@ -42,8 +42,8 @@
             "GoPay\\":"src/pay/Gopay/"
         },
         "files":[
-            "pay/GPBMetadata/Pay.php",
-            "region/GPBMetadata/Region.php"
+            "src/pay/GPBMetadata/Pay.php",
+            "src/region/GPBMetadata/Region.php"
         ]
     }
 }
