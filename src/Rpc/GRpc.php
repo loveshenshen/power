@@ -48,12 +48,22 @@ class GRpc
             $this->serverName = $serverName;
         }
 
-        $serviceFactory = new \SensioLabs\Consul\ServiceFactory([
-            'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"
-        ]);
-        $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式
-        $service = $cl->service($this->serverName); //参数传入和服务端约定的服务名
-        $microServiceData = \GuzzleHttp\json_decode($service->getBody(), true)[0];  //请求微服务的具体地址
+        try{
+            $serviceFactory = new \SensioLabs\Consul\ServiceFactory([
+                'base_uri'=>"http://{$this->consulHost}:{$this->consulPort}"
+            ]);
+            $cl = $serviceFactory->get("catalog"); //采用cataLog的服务方式
+            $service = $cl->service($this->serverName); //参数传入和服务端约定的服务名
+            $servers = \GuzzleHttp\json_decode($service->getBody(), true);
+        }catch(\Exception $exception){
+            throw new InvalidArgumentException($exception->getMessage().".  Please validate  the Ip or Port correctness");
+        }
+        if(empty($servers)){
+           throw new InvalidArgumentException("Please check the servername validity.");
+        }
+        //TODO 待优化 获取服务的ip和端口
+        $microServiceData = $servers[array_rand($servers)];  //请求微服务的具体地址
+
         if(empty($microServiceData)){
             throw new InvalidArgumentException("Not found server of consul ");
         }
