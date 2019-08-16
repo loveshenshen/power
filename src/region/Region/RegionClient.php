@@ -42,4 +42,17 @@ class RegionClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \Region\RegionDetail $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function Detail(\Region\RegionDetail $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/region.Region/Detail',
+        $argument,
+        ['\Region\Response', 'decode'],
+        $metadata, $options);
+    }
+
 }

@@ -21,24 +21,29 @@ main-local.php
  common/param-local.php
  
  ```
-    
     'application' => [
          'appId' => 'zHSeDQzMoc8NXTU343C046',
          'appSecret' => 'M3yPArGsmmATnrreqWn3sA',
      ],
  
  ```
+安装拓展
+````
+wget -O grpc.tgz https://pecl.php.net/get/grpc-1.22.0.tgz  or curl -o grpc.tgz https://pecl.php.net/get/grpc-1.22.0.tgz
 
+tar -xvf  grpc.tgz
+ 
+cd grpc-1.22.0 
+
+phpize && ./configure && make && make install
+
+````
 useage
 
 ```
    发短信
   
    先进行appid  和 appsecret 配置
-   
-   
-  
-   
    
    
    \src\Util\YunPainUtil::sendMessage($mobile,$text) 
@@ -52,6 +57,5 @@ useage
    \src\Util\PayUtil::Pay($sn,$amount,$platform,$payType = 1,$remark,$callback,$openid="")
    
    //退款
-   
-\src\Util\PayUtil::Refund($sn,$amount,$refundType = 1,$platform,$tradeNo,$totalAmount,$remark)
+    \src\Util\PayUtil::Refund($sn,$amount,$refundType = 1,$platform,$tradeNo,$totalAmount,$remark)
 ```

@@ -143,7 +143,7 @@ class PayUtil
         if($result[0] instanceof  Response){
             return [
                 'api_code'=>$result[0]->getApiCode(),
-                'data'=>json_decode($result[0]->getData(),true),
+                'data'=>$result[0]->getData(),
                 'api_msg'=>$result[0]->getApiMsg()
             ];
         }else{

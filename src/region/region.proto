@@ -5,6 +5,7 @@ package  region;
 service  Region {
    rpc   Region(Request)returns(Response){}
    rpc   Send(messageRequest)returns(messageResponse){}
+   rpc   Detail(RegionDetail)returns(Response){}
 }
 
 message Request {
@@ -39,6 +40,15 @@ message  messageResponse{
     string data =2;
     string api_msg  =3 ;
 }
+
+message RegionDetail{
+    string version =1; //1.0
+    string appId =2 ;
+    string appSecret =3 ;
+    int32  regionId =4;
+}
+
+
 
 
 
