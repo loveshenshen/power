@@ -26,8 +26,8 @@
     "require": {
         "php" : ">=7.0.0",
         "google/protobuf": "^3.9",
-        "grpc/grpc": "^v1.3.0",
-        "sensiolabs/consul-php-sdk": "^3.0"
+        "grpc/grpc": "^v1.22.0",
+        "sensiolabs/consul-php-sdk": "^3.1"
     },
 
     "config" : {
