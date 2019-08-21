@@ -46,25 +46,9 @@ class PayUtil
      * @throws Throwable
      */
     public static function Pay($sn,$amount,$platform,$payType = 1,$remark,$callback,$openid=""){
-
-        if(empty(self::$serverName)){
-            $consul = \Yii::$app->consul;
-            if(!isset($consul['serverName']['pay'])){
-                throw new \InvalidArgumentException("Please to config consul serverName of pay");
-            }
-            self::$serverName = $consul['serverName']['pay'];
-        }
+        self::init();
         $rpc = new GRpc(self::$serverName);
         $request = new Request();
-
-        if(isset(\Yii::$app->params['application'])){
-            if(isset(\Yii::$app->params['application']['appId'])){
-                self::$appId = \Yii::$app->params['application']['appId'];
-            }
-            if(isset(\Yii::$app->params['application']['appSecret'])){
-                self::$secret = \Yii::$app->params['application']['appSecret'];
-            }
-        }
         $request->setAppId(self::$appId);
         $request->setAppSecret(self::$secret);
         $request->setVersion(self::$version);
@@ -100,6 +84,25 @@ class PayUtil
         }
     }
 
+    public static  function  init(){
+        if(empty(self::$serverName)){
+            $consul = \Yii::$app->consul;
+            if(!isset($consul['serverName']['pay'])){
+                throw new \InvalidArgumentException("Please to config consul serverName of pay");
+            }
+            self::$serverName = $consul['serverName']['pay'];
+        }
+        if(isset(\Yii::$app->params['application'])){
+            if(isset(\Yii::$app->params['application']['appId'])){
+                self::$appId = \Yii::$app->params['application']['appId'];
+            }
+            if(isset(\Yii::$app->params['application']['appSecret'])){
+                self::$secret = \Yii::$app->params['application']['appSecret'];
+            }
+        }
+    }
+
+
 
     /**
      * @param string $sn 退款订单号
@@ -114,17 +117,9 @@ class PayUtil
      * @throws Throwable
      */
     public static function  Refund($sn,$amount,$refundType = 1,$platform,$tradeNo,$totalAmount,$remark){
-        $rpc = new GRpc();
+        self::init();
+        $rpc = new GRpc(self::$serverName);
         $request = new RefundRequest();
-
-        if(isset(\Yii::$app->params['application'])){
-            if(isset(\Yii::$app->params['application']['appId'])){
-                self::$appId = \Yii::$app->params['application']['appId'];
-            }
-            if(isset(\Yii::$app->params['application']['appSecret'])){
-                self::$secret = \Yii::$app->params['application']['appSecret'];
-            }
-        }
         $request->setAppId(self::$appId);
         $request->setAppSecret(self::$secret);
         $request->setVersion(self::$version);
@@ -135,8 +130,7 @@ class PayUtil
         $request->setTradeNo($tradeNo);
         $request->setTotalAmount($totalAmount);
         $request->setRemark($remark);
-
-        $result = $rpc->call($request,"Refund");
+        $result = $rpc->call($request,"Refund",GopayClient::class);
         if(!isset($result[0]) ){
             throw new HttpException("Result is Invalid");
         }
@@ -150,9 +144,5 @@ class PayUtil
             throw new HttpException("Result is Invalid");
         }
     }
-
-
-
-
 
 }

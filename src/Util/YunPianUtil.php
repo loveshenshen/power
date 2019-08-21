@@ -27,17 +27,7 @@ class YunPianUtil
       private static  $version = '';
       private static  $type = 1;//type =1 默认是云片
       private static  $serverName = "go.micro.srv.region";
-
-
-    /**
-     * @param $mobile
-     * @param $text
-     * @return array
-     * @throws HttpException
-     * @throws Throwable
-     */
-      public static function sendMessage($mobile,$text){
-
+      public static function init(){
           if(isset(\Yii::$app->params['application'])){
               if(isset(\Yii::$app->params['application']['appId'])){
                   self::$appId = \Yii::$app->params['application']['appId'];
@@ -53,6 +43,17 @@ class YunPianUtil
               }
               self::$serverName = $consul['serverName']['pay'];
           }
+      }
+
+    /**
+     * @param $mobile
+     * @param $text
+     * @return array
+     * @throws HttpException
+     * @throws Throwable
+     */
+      public static function sendMessage($mobile,$text){
+           self::init();
            $rpc = new GRpc(self::$serverName);
            $request = new \Region\messageRequest();
            $request->setVersion(self::$version);
